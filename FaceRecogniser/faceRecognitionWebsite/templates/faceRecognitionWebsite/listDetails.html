@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<!--
+	Linear by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>Attendance Details</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700,500,900' rel='stylesheet' type='text/css'>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+{% load static %}
+		<script src="{% static 'faceRecognitionWebsite/skel.min.js' %}"></script>
+		<script src="{% static 'faceRecognitionWebsite/skel-panels.min.js' %}"></script>
+		<script src="{% static 'faceRecognitionWebsite/init.js' %}"></script>
+		<script src="{% static 'faceRecognitionWebsite/tabs.js' %}"></script>
+
+		<link rel="stylesheet" type="text/css" href="{% static 'faceRecognitionWebsite/skel-noscript.css' %}"/>
+		<link rel="stylesheet" type="text/css" href="{% static 'faceRecognitionWebsite/style.css' %}"/>
+		<link rel="stylesheet" type="text/css" href="{% static 'faceRecognitionWebsite/style-desktop.css' %}"/>
+	</head>
+	<body>
+
+	<!-- Header -->
+		<div id="header">
+			<div id="nav-wrapper"> 
+				<!-- Nav -->
+				<nav id="nav">
+					<ul>
+						<li class="active"><a href="/faceRecognitionWebsite">Homepage</a></li>
+						<li><a href="/faceRecognitionWebsite/people">Students</a></li>
+						<li><a href="/faceRecognitionWebsite/groups">Groups</a></li>
+						<li><a href="/faceRecognitionWebsite/lists">Attendance Lists</a></li>
+						<li><a href="/faceRecognitionWebsite/subjects">Subjects</a></li>
+						<li><a href="/faceRecognitionWebsite/grades">Grades</a></li>
+					</ul>
+				</nav>
+			</div>
+			<div class="container"> 
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h1>E &#45; register</h1>
+					<span class="tag">
+						Welcome to E &#45; register, a program that creates attendance & grades list by recognising students' faces and handwritting.
+					</span>
+				</div>
+			</div>
+		</div>
+	<!-- Header --> 
+
+	<!-- Main -->
+		<div id="main">
+			<div id="content" class="container">
+				<section>
+					<header>
+						<h2>Attendance List</h2>
+						
+					</header>
+
+					{% if list %}
+						<h3>{{ list.date }}</h3>
+						<h4>{{ list.group }}</h4>
+
+						<div class="tab">
+						  <button class="tablinks active" onclick="switchTab(event, 'all')">Whole Group</button>
+						  <button class="tablinks" onclick="switchTab(event, 'present')">Only Present</button>
+						  <button class="tablinks" onclick="switchTab(event, 'absent')">Only Absent</button>
+						  <button class="tablinks" onclick="switchTab(event, 'present_extras')">Present from other group</button>
+						</div>
+
+						<div id="all" class="tabcontent">
+						    <table>
+						    <tr>
+					    		<th>Surname </th>
+					    		<th>Name </th>
+					    		<th>Was present?</th> 
+						    </tr>
+						    {% for person in group_members %}
+						        <tr>
+						        	<td><a href="/faceRecognitionWebsite/people/{{person.id}}" class="details-link">{{ person.surname }}</a></td>
+						        	<td><a href="/faceRecognitionWebsite/people/{{person.id}}" class="details-link">{{ person.name }}</a></td>
+						        	<td>
+						        		{% if person in list.members.all %}
+						        			<i class="fa fa-check"></i>
+						        		{% else %}
+						        			<i class="fa fa-times"></i> 
+						        		{% endif %}
+						        	</td>
+						        </tr>
+						    {% endfor %}
+						    </table>
+						</div>
+
+						<div id="present" class="tabcontent" style="display: none;">
+						    <table>
+						    <tr>
+					    		<th>Surname </th>
+					    		<th>Name </th>
+						    </tr>
+							{% for person in group_members %}
+						    	{% if person in list.members.all %}
+				        			<tr class="presentPeople">
+										<td><a href="/faceRecognitionWebsite/people/{{person.id}}" class="details-link">{{ person.surname }}</a></td>
+										<td><a href="/faceRecognitionWebsite/people/{{person.id}}" class="details-link">{{ person.name }}</a></td>
+							        </tr>
+				        		{% else %}
+				        			<tr class="absentPeople">
+										<td><a href="/faceRecognitionWebsite/people/{{person.id}}" class="details-link">{{ person.surname }}</a></td>
+							        	<td><a href="/faceRecognitionWebsite/people/{{person.id}}" class="details-link">{{ person.name }}</a></td>
+							        </tr>
+				        		{% endif %}
+						        
+							{% endfor %}
+							{% for person in not_group_members %}
+								<tr class="extra_people">
+									<td><a href="/faceRecognitionWebsite/people/{{person.id}}" class="details-link">{{ person.surname }}</a></td>
+							        <td><a href="/faceRecognitionWebsite/people/{{person.id}}" class="details-link">{{ person.name }}</a></td>
+								</tr>
+							{% endfor %}
+						    </table>
+						</div>
+						<div id="emptylist" style="display: none">
+							<p>No people on the list.</p>
+						</div>				
+					{% else %}
+					    <p>No people on the list.</p>
+					{% endif %}
+				</section>
+			</div>
+		</div>
+	<!-- /Main -->
+
+	<!-- Copyright -->
+		<div id="copyright">
+			<div class="container">
+				<h4>Author: Klaudia Budzyńska</h4>
+			</div>
+		</div>
+
+
+	</body>
+</html>

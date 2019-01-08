@@ -1,0 +1,6 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Link to Attendance Lists
+Type=Link
+URL=http://localhost:8081/faceRecognitionWebsite/lists
+Icon=text-html

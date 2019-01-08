@@ -1,0 +1,246 @@
+<fieldset class="module aligned {{ fieldset.classes }}">
+    {% if fieldset.name %}<h2>{{ fieldset.name }}</h2>{% endif %}
+    {% if fieldset.description %}
+        <div class="description">{{ fieldset.description|safe }}</div>
+    {% endif %}
+    {% for line in fieldset %}
+        <div class="form-row{% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% if not line.has_visible_field %} hidden{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% endfor %}">
+            {% if line.fields|length_is:'1' %}{{ line.errors }}{% endif %}
+            {% for field in line %}
+                {% if field.field.name == "encoding" %}
+                    <label for="id_encoding" class="required">Encoding:</label>
+                    <input id="id_encoding" name="encoding" type="text" value="{{field.field.value}}" readonly>
+                    <div id="photo_add" style="position: relative;">
+                        <ul id="photo_error" class="errorlist" hidden>
+                            <li id="photo_error_message"></li>
+                        </ul>
+                        <form id="photo_form" enctype="multipart/form-data">
+                            <label for="id_photo">Load encoding from photo:</label>
+                            <input id="id_photo" type="file" name="file">
+                    
+                    
+                            <div id="spinner" hidden class="lds-css ng-scope" style="position: absolute; top:-90%; left: 390px;">
+                                <div class="lds-spinner" style="height:100%;">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                                <style type="text/css">
+                                    @keyframes lds-spinner {
+                                        0% {
+                                            opacity: 1;
+                                        }
+                                        100% {
+                                            opacity: 0;
+                                        }
+                                    }
+                    
+                                    @-webkit-keyframes lds-spinner {
+                                        0% {
+                                            opacity: 1;
+                                        }
+                                        100% {
+                                            opacity: 0;
+                                        }
+                                    }
+                    
+                                    .lds-spinner {
+                                        position: relative;
+                                    }
+                    
+                                    .lds-spinner div {
+                                        left: 94px;
+                                        top: 48px;
+                                        position: absolute;
+                                        -webkit-animation: lds-spinner linear 1s infinite;
+                                        animation: lds-spinner linear 1s infinite;
+                                        background: #1d3f72;
+                                        width: 12px;
+                                        height: 24px;
+                                        border-radius: 40%;
+                                        -webkit-transform-origin: 6px 52px;
+                                        transform-origin: 6px 52px;
+                                    }
+                    
+                                    .lds-spinner div:nth-child(1) {
+                                        -webkit-transform: rotate(0deg);
+                                        transform: rotate(0deg);
+                                        -webkit-animation-delay: -0.916666666666667s;
+                                        animation-delay: -0.916666666666667s;
+                                    }
+                    
+                                    .lds-spinner div:nth-child(2) {
+                                        -webkit-transform: rotate(30deg);
+                                        transform: rotate(30deg);
+                                        -webkit-animation-delay: -0.833333333333333s;
+                                        animation-delay: -0.833333333333333s;
+                                    }
+                    
+                                    .lds-spinner div:nth-child(3) {
+                                        -webkit-transform: rotate(60deg);
+                                        transform: rotate(60deg);
+                                        -webkit-animation-delay: -0.75s;
+                                        animation-delay: -0.75s;
+                                    }
+                    
+                                    .lds-spinner div:nth-child(4) {
+                                        -webkit-transform: rotate(90deg);
+                                        transform: rotate(90deg);
+                                        -webkit-animation-delay: -0.666666666666667s;
+                                        animation-delay: -0.666666666666667s;
+                                    }
+                    
+                                    .lds-spinner div:nth-child(5) {
+                                        -webkit-transform: rotate(120deg);
+                                        transform: rotate(120deg);
+                                        -webkit-animation-delay: -0.583333333333333s;
+                                        animation-delay: -0.583333333333333s;
+                                    }
+                    
+                                    .lds-spinner div:nth-child(6) {
+                                        -webkit-transform: rotate(150deg);
+                                        transform: rotate(150deg);
+                                        -webkit-animation-delay: -0.5s;
+                                        animation-delay: -0.5s;
+                                    }
+                    
+                                    .lds-spinner div:nth-child(7) {
+                                        -webkit-transform: rotate(180deg);
+                                        transform: rotate(180deg);
+                                        -webkit-animation-delay: -0.416666666666667s;
+                                        animation-delay: -0.416666666666667s;
+                                    }
+                    
+                                    .lds-spinner div:nth-child(8) {
+                                        -webkit-transform: rotate(210deg);
+                                        transform: rotate(210deg);
+                                        -webkit-animation-delay: -0.333333333333333s;
+                                        animation-delay: -0.333333333333333s;
+                                    }
+                    
+                                    .lds-spinner div:nth-child(9) {
+                                        -webkit-transform: rotate(240deg);
+                                        transform: rotate(240deg);
+                                        -webkit-animation-delay: -0.25s;
+                                        animation-delay: -0.25s;
+                                    }
+                    
+                                    .lds-spinner div:nth-child(10) {
+                                        -webkit-transform: rotate(270deg);
+                                        transform: rotate(270deg);
+                                        -webkit-animation-delay: -0.166666666666667s;
+                                        animation-delay: -0.166666666666667s;
+                                    }
+                    
+                                    .lds-spinner div:nth-child(11) {
+                                        -webkit-transform: rotate(300deg);
+                                        transform: rotate(300deg);
+                                        -webkit-animation-delay: -0.083333333333333s;
+                                        animation-delay: -0.083333333333333s;
+                                    }
+                    
+                                    .lds-spinner div:nth-child(12) {
+                                        -webkit-transform: rotate(330deg);
+                                        transform: rotate(330deg);
+                                        -webkit-animation-delay: 0s;
+                                        animation-delay: 0s;
+                                    }
+                    
+                                    .lds-spinner {
+                                        width: 64px !important;
+                                        height: 64px !important;
+                                        -webkit-transform: translate(-32px, -32px) scale(0.32) translate(32px, 32px);
+                                        transform: translate(-32px, -32px) scale(0.32) translate(32px, 32px);
+                                    }
+                                </style>
+                            </div>
+                        </form>
+                    </div>
+                {% else %}
+                    <div{% if not line.fields|length_is:'1' %} class="field-box{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% if not field.is_readonly and field.errors %} errors{% endif %}{% if field.field.is_hidden %} hidden{% endif %}"{% elif field.is_checkbox %} class="checkbox-row"{% endif %}>
+                        {% if not line.fields|length_is:'1' and not field.is_readonly %}{{ field.errors }}{% endif %}
+                        {% if field.is_checkbox %}
+                            {{ field.field }}{{ field.label_tag }}
+                        {% else %}
+                            {{ field.label_tag }}
+                            {% if field.is_readonly %}
+                                <div class="readonly">{{ field.contents }}</div>
+                            {% else %}
+                                {{ field.field }}
+                            {% endif %}
+                        {% endif %}
+                        {% if field.field.help_text %}
+                            <div class="help">{{ field.field.help_text|safe }}</div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+</fieldset>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $('#id_photo').on('change', function () {
+        var file = this.files[0];
+        if(file.type === "image/png" || file.type == "image/jpeg"){
+            hidePhotoUploadError();
+            $('#spinner').show();
+            var formData = new FormData();
+            formData.append('file', file, file.name);
+
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    res = JSON.parse(xhr.response);
+                    if(res.error){
+                        showPhotoUploadError(res.message);
+                    }else{
+                        $('#id_encoding').val(res.encoding.toString());
+                    }
+                    $('#spinner').hide();
+                }
+            }
+
+            xhr.open('POST', '/api/upload/', true);
+            xhr.setRequestHeader("X-CSRFToken",getCookie("csrftoken"));
+            xhr.setRequestHeader("Content-Disposition","attachment; filename="+file.name);
+            xhr.send(formData);
+        }
+        else{
+            showPhotoUploadError('Wrong file type');
+        }   
+    });
+
+    function showPhotoUploadError(message) {
+        $('#photo_error').show();
+        $('#photo_add').addClass('errors');
+        $('#photo_error_message').html(message);
+    }
+
+    function hidePhotoUploadError() {
+            $('#photo_error').hide();
+            $('#photo_add').removeClass('errors');
+    }
+    
+    function getCookie(c_name) {
+        if (document.cookie.length > 0) {
+            c_start = document.cookie.indexOf(c_name + "=");
+            if (c_start != -1) {
+                c_start = c_start + c_name.length + 1;
+                c_end = document.cookie.indexOf(";", c_start);
+                if (c_end == -1) c_end = document.cookie.length;
+                return unescape(document.cookie.substring(c_start, c_end));
+            }
+        }
+        return "";
+    }
+</script>

@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<!--
+	Linear by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>Person Details</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700,500,900' rel='stylesheet' type='text/css'>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+{% load static %}
+		<script src="{% static 'faceRecognitionWebsite/skel.min.js' %}"></script>
+		<script src="{% static 'faceRecognitionWebsite/skel-panels.min.js' %}"></script>
+		<script src="{% static 'faceRecognitionWebsite/init.js' %}"></script>
+
+		<link rel="stylesheet" type="text/css" href="{% static 'faceRecognitionWebsite/skel-noscript.css' %}"/>
+		<link rel="stylesheet" type="text/css" href="{% static 'faceRecognitionWebsite/style.css' %}"/>
+		<link rel="stylesheet" type="text/css" href="{% static 'faceRecognitionWebsite/style-desktop.css' %}"/>
+	</head>
+	<body>
+
+	<!-- Header -->
+		<div id="header">
+			<div id="nav-wrapper"> 
+				<!-- Nav -->
+				<nav id="nav">
+					<ul>
+						<li class="active"><a href="/faceRecognitionWebsite">Homepage</a></li>
+						<li><a href="/faceRecognitionWebsite/people">Students</a></li>
+						<li><a href="/faceRecognitionWebsite/groups">Groups</a></li>
+						<li><a href="/faceRecognitionWebsite/lists">Attendance Lists</a></li>
+						<li><a href="/faceRecognitionWebsite/subjects">Subjects</a></li>
+						<li><a href="/faceRecognitionWebsite/grades">Grades</a></li>
+					</ul>
+				</nav>
+			</div>
+			<div class="container"> 
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h1>E &#45; register</h1>
+					<span class="tag">
+						Welcome to E &#45; register, a program that creates attendance & grades list by recognising students' faces and handwritting.
+					</span>
+				</div>
+			</div>
+		</div>
+	<!-- Header --> 
+
+	<!-- Main -->
+		<div id="main">
+			<div id="content" class="container">
+				<section>
+					<header>
+                        <h2>{{person.surname}} {{person.name}}</h2>
+                        <span class="byline"></span>
+					</header>
+
+                    {% if table %}
+                        {% for item in table %}
+                            <table>
+                            <tr>
+                                <th colspan=2 style="border-bottom: none;">
+                                    <a href="/faceRecognitionWebsite/subjects/{{item.1.0.id}}" class="details-link">{{item.1.0.name}}</a>
+                                </th>                           
+                            <tr>
+                                <th colspan=2>
+                                        <a href="/faceRecognitionWebsite/groups/{{item.0.id}}" class="details-link">{{item.0.name}}</a>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Grade </th>
+                                <th>Description </th>
+                            </tr>
+                                {% for grade in grades %}
+                                    {% if grade.subject == item.1.0 %}
+                                        <tr>
+                                            <td>{{ grade.number }}</td>
+                                            <td>{{ grade.description }}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </table>
+                        {% endfor %}
+					{% else %}
+					    <p>No subjects on the list.</p>
+					{% endif %}
+				</section>
+			</div>
+		</div>
+	<!-- /Main -->
+
+	<!-- Copyright -->
+		<div id="copyright">
+			<div class="container">
+				<h4>Author: Klaudia Budzyńska</h4>
+			</div>
+		</div>
+
+
+	</body>
+</html>
