@@ -33,7 +33,7 @@ W pliku /FaceRecogniser/mysite/settings.py należy podać informacje dotyczące 
 	    'default': {
 	        'ENGINE': 'django.db.backends.postgresql_psycopg2',
 	        'NAME': 'facedb',
-	        'USER': 'klaudia',
+	        'USER': 'admin',
 	        'PASSWORD': 'admin',
 	        'HOST': 'localhost',
 	        'PORT': '',
