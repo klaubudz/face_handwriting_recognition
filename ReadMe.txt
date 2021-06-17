@@ -1,4 +1,4 @@
-# Face & handwriting recognition - Automatic Class Register
+Face & handwriting recognition - Automatic Class Register
 
 A client-server application supporting teacher’s work. It processes real-time video image and uses AI techniques for detecting and recognising
 both student’s faces and handwriting. In one client app a person's face is identified and his/her attendance or abscence is saved in a database. 
