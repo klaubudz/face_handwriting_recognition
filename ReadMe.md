@@ -7,7 +7,7 @@ The second one is responsible for handwriting recognition and saving students' g
 Technologies / tools:
 	Python, Django, HTML, CSS, JavaScript, OpenCV (face detection & recognition), Google Cloud Vision API (handwriting recognition)
 	
-
+<img src="https://user-images.githubusercontent.com/15994534/122384975-8766a200-cf6c-11eb-9273-36955f799071.png" width="50%"></img> 
 
 -------------------------------------------------------------------------------------------------------
 
