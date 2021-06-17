@@ -5,27 +5,28 @@ both student’s faces and handwriting. In one client app a person's face is ide
 The second one is responsible for handwriting recognition and saving students' grades list. The data can be accessed via a dedicated website by both students and teachers. 
 
 Technologies / tools:
-	Python, Django, HTML, CSS, JavaScript, OpenCV (face detection & recognition), Google Cloud Vision API (handwriting recognition)
+
+Python, Django, HTML, CSS, JavaScript, OpenCV (face detection & recognition), Google Cloud Vision API (handwriting recognition)
 	
-<img src="https://user-images.githubusercontent.com/15994534/122384975-8766a200-cf6c-11eb-9273-36955f799071.png" width="50%"></img> 
+<img src="https://user-images.githubusercontent.com/15994534/122385551-415e0e00-cf6d-11eb-92fc-b535657e3c1b.png" width="55%"></img> 
 
 -------------------------------------------------------------------------------------------------------
 
 Requirements: 
-	- Python3
-	- PostgreSQL
-	- pip3 ( sudo apt install python3-pip )
+- Python3
+- PostgreSQL
+- pip3 ( sudo apt install python3-pip )
 	
 Packages:
-	- face_recognition
-	- django
-	- requests
-	- json
-	- base64
-	- djangorestframework
-	- markdown
-	- django-filter
-	- openCV (instalacja: https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html )
+- face_recognition
+- django
+- requests
+- json
+- base64
+- djangorestframework
+- markdown
+- django-filter
+- openCV (installation: https://docs.opencv.org/master/d7/d9f/tutorial_linux_install.html )
 
 Package installation: pip3 install package_name
 
@@ -33,15 +34,16 @@ Package installation: pip3 install package_name
 
 ==== Web Application ====
 
-Running app: python3 manage.py runserver 8081
+- Running app: python3 manage.py runserver 8081
 
-Website adress: http://localhost:8081/faceRecognitionWebsite
+- Website adress: http://localhost:8081/faceRecognitionWebsite
 
-Admin panel: http://127.0.0.1:8081/admin/faceRecognitionWebsite/
-	-> Login: admin
-	-> Password: adminadmin
+- Admin panel: http://127.0.0.1:8081/admin/faceRecognitionWebsite/
+  - Login: admin
+  - Password: adminadmin
 
 In the /FaceRecogniser/mysite/settings.py file you need to provide information on used database, e.g.:
+```
 	DATABASES = {
 	    'default': {
 	        'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -52,25 +54,25 @@ In the /FaceRecogniser/mysite/settings.py file you need to provide information o
 	        'PORT': '',
 	    }
 	}
-
+```
 -------------------------------------------------------------------------------------------------------
 
 Console applications require camera access.
 
 ==== Console app - attendance list ====
 
-Running: python3 app.py
-Termination: 'esc' button.
+- Running: python3 app.py
+- Termination: 'esc' button.
 
 
 ==== Console app - grades ====
 
-Running app: python3 app_hwrt.py
-Termination: 'q' button.
+- Running app: python3 app_hwrt.py
+- Termination: 'q' button.
 
-NOTICE !!! 
+**NOTICE !!!**  
 For the application to work, a Google API Key is required. It should be specified in the /face-recognition-client/terminal_hwrt.py file in method: 
-
+```
 def send_request(self,content):
     URL = 'https://vision.googleapis.com/v1/images:annotate?key=moj_google_api_key
-
+```
